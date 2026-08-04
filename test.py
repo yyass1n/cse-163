@@ -1,10 +1,12 @@
 import pandas as pd
-from eda import (add_outcome, get_outcome, possession_numbers, text_to_float, transform_possession, 
-    text_to_float, get_outcome, add_outcome)
+from eda import (add_outcome, get_outcome, possession_numbers,
+                text_to_float, transform_possession,
+                get_outcome, add_outcome)
+
 
 def test_possession_numbers():
     """
-    This tests the method that turns a single possession 
+    This tests the method that turns a single possession
     percentage from a string into a float.
     """
     assert possession_numbers('32%') == 32.0
@@ -12,9 +14,10 @@ def test_possession_numbers():
     assert possession_numbers('100%') == 100.0
     print("All tests passed! (possession_numbers)")
 
+
 def test_transform_possession():
     """
-    This tests the method that turns the list of 
+    This tests the method that turns the list of
     possession percentages from strings into floats.
     """
     df = pd.DataFrame({
@@ -27,9 +30,10 @@ def test_transform_possession():
     assert new_df['Ball_Possession_Host'].tolist() == [72.0, 89.0, 0.0]
     print("All tests passed! (transform_possession)")
 
+
 def test_text_to_float():
     """
-    This tests the method that makes text columns into 
+    This tests the method that makes text columns into
     float columns.
     """
     df = pd.DataFrame({
@@ -42,11 +46,12 @@ def test_text_to_float():
     assert new_df['away_score'].tolist() == [0.0, 1.0, 5.0]
     print("All tests passed! (text_to_float)")
 
+
 def test_get_outcome_wins():
     """
     This tests the method that determines if a match
     was a win based on the scores of the home
-    and away teams. If the away team scores less 
+    and away teams. If the away team scores less
     than the home team, the result is a win.
     """
     curr = pd.Series({'home_score': 4, 'away_score': 3})
@@ -58,7 +63,7 @@ def test_get_outcome_losses():
     """
     This tests the method that determines if a match
     was a loss based on the scores of the home
-    and away teams. If the away team scores more 
+    and away teams. If the away team scores more
     than the home team, the result is a loss.
     """
     curr = pd.Series({'home_score': 2, 'away_score': 7})
@@ -66,11 +71,12 @@ def test_get_outcome_losses():
     assert result == 'Loss'
     print("All tests passed! (get_outcome_losses)")
 
+
 def test_get_outcome_draws():
     """
     This tests the method that determines if a match
     was a draw based on the scores of the home
-    and away teams. If the home and away teams score 
+    and away teams. If the home and away teams score
     the same, the result is a draw.
     """
     curr = pd.Series({'home_score': 1, 'away_score': 1})
@@ -78,11 +84,12 @@ def test_get_outcome_draws():
     assert result == 'Draw'
     print("All tests passed! (get_outcome_draws)")
 
+
 def test_add_outcome():
     """
     This tests the method that deciphers a loss, draw,
-    or win correctly based on the scores of the home and 
-    away teams into a dataframe. 
+    or win correctly based on the scores of the home and
+    away teams into a dataframe.
     """
     df = pd.DataFrame({
         'home_score': [3, 5, 2],
@@ -92,6 +99,7 @@ def test_add_outcome():
 
     assert new_df['Outcome'].tolist() == ['Loss', 'Win', 'Draw']
     print("All tests passed! (add_outcome)")
+
 
 def main():
     test_possession_numbers()
@@ -103,6 +111,6 @@ def main():
     test_add_outcome()
     print("\nAll tests passed!")
 
+
 if __name__ == "__main__":
     main()
-    
