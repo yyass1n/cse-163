@@ -112,39 +112,6 @@ def possession_vs_goals(df):
     )
     fig2.show()
 
-def anova_possession_outcome(df):
-    """
-    This method performs an ANOVA test to see if there are 
-    significant differences in possession percentages
-    across different match outcomes.
-    """
-    win = df[df['Outcome'] == 'Win']['Ball_Possession_Home']
-    loss = df[df['Outcome'] == 'Loss']['Ball_Possession_Home']
-    draw = df[df['Outcome'] == 'Draw']['Ball_Possession_Home']
-
-    result= stats.f_oneway(win, loss, draw)
-    print('\nANOVA Test Results for possession by match outcome:')
-    print('F-Statistic: ', result.statistic, 'P-Value: ', result.pvalue)
-
-def correlation_possession_conceded_goals(df):
-    """
-    This function finds the correlation between possession 
-    and goals conceded in the given dataset. 
-    """
-    r, p = stats.pearsonr(df['Ball_Possession_Home'], df['away_score'])
-    print('\nCorrelation between possession and goals conceded:')
-    print('r:', r, 'p-value:', p)
-
-
-def correlation_possession_goals_scored(df):
-    """
-    This function finds the correlation between possession and
-    goals scored in the dataset.
-    """
-    r, p = stats.pearsonr(df['Ball_Possession_Home'], df['home_score'])
-    print('\nCorrelation between possession and goals scored:')
-    print('r:', r, 'p-value:', p)
-
 def main():
     df = pd.read_csv("data/Football.csv")
     print('full data shape:', df.shape)
@@ -168,9 +135,6 @@ def main():
     possession_vs_outcome(epl_df)
     possession_vs_goals(epl_df)
 
-    anova_possession_outcome(epl_df)
-    correlation_possession_conceded_goals(epl_df)
-    correlation_possession_goals_scored(epl_df)
 
 if __name__ == "__main__":
     main()
